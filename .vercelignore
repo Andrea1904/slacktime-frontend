@@ -1,0 +1,7 @@
+# Ignore cache directories
+node_modules/.cache
+.angular/cache
+dist
+*.log
+
+# Force fresh builds
