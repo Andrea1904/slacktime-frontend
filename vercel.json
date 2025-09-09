@@ -1,15 +1,15 @@
 {
   "version": 2,
   "framework": null,
-  "buildCommand": "npm run vercel-build",
+  "buildCommand": "npm run build",
   "installCommand": "npm install --legacy-peer-deps --force",
-  "outputDirectory": "dist/FrontSlack/browser",
+  "outputDirectory": "dist/browser",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/FrontSlack/browser"
+        "distDir": "dist/browser"
       }
     }
   ],
