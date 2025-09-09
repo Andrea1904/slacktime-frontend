@@ -14,13 +14,22 @@ try {
     fs.rmSync('dist', { recursive: true, force: true });
   }
   
-  // Install dependencies with no cache
-  console.log('📦 Installing dependencies (no cache)...');
-  execSync('npm ci --legacy-peer-deps --no-cache', { stdio: 'inherit' });
+  // Clean npm cache and node_modules
+  console.log('🧹 Cleaning npm cache and node_modules...');
+  if (fs.existsSync('node_modules')) {
+    fs.rmSync('node_modules', { recursive: true, force: true });
+  }
+  if (fs.existsSync('package-lock.json')) {
+    fs.unlinkSync('package-lock.json');
+  }
+  
+  // Install dependencies with clean slate
+  console.log('📦 Installing dependencies (clean install)...');
+  execSync('npm install --legacy-peer-deps --no-cache --force', { stdio: 'inherit' });
   
   // Build Angular application
   console.log('🔨 Building Angular application...');
-  execSync('npx ng build --configuration production --source-map=false --verbose', { stdio: 'inherit' });
+  execSync('npx ng build --configuration production --source-map=false', { stdio: 'inherit' });
   
   // Verify build output
   const distPath = path.join(__dirname, 'dist', 'FrontSlack', 'browser');
