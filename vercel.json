@@ -1,11 +1,15 @@
 {
   "version": 2,
+  "framework": null,
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci",
+  "outputDirectory": "dist",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/FrontSlack/browser"
+        "distDir": "dist"
       }
     }
   ],
@@ -14,8 +18,5 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
