@@ -31,11 +31,11 @@ try {
   execSync('npx ng build --configuration production --source-map=false', { stdio: 'inherit' });
   
   // Verify build output
-  const distPath = path.join(__dirname, 'dist', 'FrontSlack', 'browser');
+  const distPath = path.join(__dirname, 'dist', 'browser');
   if (fs.existsSync(distPath)) {
     console.log('✅ Angular build completed successfully!');
     console.log('📁 Output directory:', distPath);
-    console.log('�� Files generated:', fs.readdirSync(distPath));
+    console.log('📄 Files generated:', fs.readdirSync(distPath));
   } else {
     throw new Error('Build output directory not found');
   }
