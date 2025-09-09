@@ -1,0 +1,296 @@
+/* Contenedor principal */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  margin: 10px 0 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* Tarjeta del formulario */
+.form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Campos del formulario */
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 20px;
+}
+
+.date-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .date-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Información del grupo */
+.group-info {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  border-left: 4px solid #667eea;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.info-header mat-icon {
+  margin-right: 8px;
+  color: #667eea;
+}
+
+.people-list {
+  display: grid;
+  gap: 10px;
+}
+
+.person-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+}
+
+.person-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.person-icon {
+  margin-right: 10px;
+  color: #6c757d;
+  font-size: 20px;
+}
+
+.person-name {
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+}
+
+.person-email {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+}
+
+/* Sección de fechas */
+.date-section h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.date-section h3::before {
+  content: "📅";
+  margin-right: 8px;
+}
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.submit-button {
+  min-width: 200px;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.submit-button:not(:disabled) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.clear-button {
+  min-width: 120px;
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.spinner {
+  margin-right: 8px;
+}
+
+/* Sección de información */
+.info-section {
+  margin-top: 30px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.info-card h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li {
+  margin-bottom: 8px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Estados de carga y deshabilitado */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 10px;
+  }
+  
+  .form-card {
+    padding: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .submit-button,
+  .clear-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Estilos para los snackbars */
+::ng-deep .snackbar-success {
+  background: #4caf50;
+  color: white;
+}
+
+::ng-deep .snackbar-error {
+  background: #f44336;
+  color: white;
+}
+
+::ng-deep .snackbar-warning {
+  background: #ff9800;
+  color: white;
+}
+
+/* Mejoras en los campos de formulario */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #e0e0e0;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #667eea;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #667eea;
+}
+
+/* Estilos para el select */
+::ng-deep .mat-select-value {
+  color: #333;
+}
+
+::ng-deep .mat-select-arrow {
+  color: #667eea;
+}
+
+/* Estilos para los iconos en los campos */
+::ng-deep .mat-form-field-suffix mat-icon {
+  color: #667eea;
+}

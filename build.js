@@ -1,153 +1,21 @@
 #!/usr/bin/env node
 
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-console.log('🚀 Starting Vercel build process (MINIMAL APPROACH)...');
+console.log('🚀 Starting Angular build process...');
 
 try {
-  // Create dist directory
-  const distDir = path.join(__dirname, 'dist');
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
-  }
+  // Install dependencies first
+  console.log('📦 Installing dependencies...');
+  execSync('npm ci --legacy-peer-deps', { stdio: 'inherit' });
   
-  // Create a simple HTML file
-  const htmlContent = `<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlackTime</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>SlackTime - Clasificador de Eventos</h1>
-        <form id="formulario">
-            <div class="form-group">
-                <label for="correos">Correos Electrónicos (uno por línea):</label>
-                <textarea id="correos" name="correos" rows="5" placeholder="usuario1@empresa.com&#10;usuario2@empresa.com"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="fechaInicio">Fecha de Inicio:</label>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="fechaFin">Fecha de Fin:</label>
-                <input type="date" id="fechaFin" name="fechaFin" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="tipoEvento">Tipo de Evento:</label>
-                <select id="tipoEvento" name="tipoEvento" required>
-                    <option value="">Seleccionar tipo de evento</option>
-                    <option value="reunion">Reunión</option>
-                    <option value="capacitacion">Capacitación</option>
-                    <option value="evento_social">Evento Social</option>
-                    <option value="otro">Otro</option>
-                </select>
-            </div>
-            
-            <button type="submit">Procesar Eventos</button>
-        </form>
-        
-        <div id="resultado" style="display: none;">
-            <h2>Resultado del Procesamiento</h2>
-            <div id="mensaje"></div>
-        </div>
-    </div>
-    
-    <script>
-        document.getElementById('formulario').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const correos = document.getElementById('correos').value.split('\\n').filter(c => c.trim());
-            const fechaInicio = document.getElementById('fechaInicio').value;
-            const fechaFin = document.getElementById('fechaFin').value;
-            const tipoEvento = document.getElementById('tipoEvento').value;
-            
-            if (correos.length === 0) {
-                alert('Por favor ingrese al menos un correo electrónico');
-                return;
-            }
-            
-            if (!fechaInicio || !fechaFin) {
-                alert('Por favor seleccione las fechas de inicio y fin');
-                return;
-            }
-            
-            if (!tipoEvento) {
-                alert('Por favor seleccione el tipo de evento');
-                return;
-            }
-            
-            // Simular procesamiento
-            document.getElementById('resultado').style.display = 'block';
-            document.getElementById('mensaje').innerHTML = '<div class="success">✅ Formulario procesado correctamente. Los datos han sido enviados para procesamiento.</div>';
-        });
-    </script>
-</body>
-</html>`;
+  // Build Angular application
+  console.log('🔨 Building Angular application...');
+  execSync('npx ng build --configuration production --source-map=false', { stdio: 'inherit' });
   
-  // Write HTML file
-  fs.writeFileSync(path.join(distDir, 'index.html'), htmlContent);
-  
-  console.log('✅ Build completed successfully with minimal approach!');
+  console.log('✅ Angular build completed successfully!');
   
 } catch (error) {
   console.error('❌ Build failed:', error.message);

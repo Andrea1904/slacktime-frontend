@@ -1,0 +1,102 @@
+<div class="form-container">
+  <div class="header">
+    <h1>📊 SlackTime</h1>
+    <p class="subtitle">Análisis de tiempo en reuniones y beneficios</p>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <!-- Campo Nombre del Grupo -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del Grupo</mat-label>
+        <mat-select formControlName="nombreGrupo" placeholder="Selecciona el nombre del grupo">
+          <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+            {{ grupo }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('nombreGrupo')?.hasError('required')">
+          El nombre del grupo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Información del grupo seleccionado -->
+      <div *ngIf="nombres.length > 0" class="group-info">
+        <div class="info-header">
+          <span>Personas en el grupo ({{ getTotalPersonas() }})</span>
+        </div>
+        <div class="people-list">
+          <div *ngFor="let persona of nombres" class="person-item">
+            <span class="person-name">{{ persona.nombre }}</span>
+            <span class="person-email">{{ persona.correo }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fechas -->
+      <div class="date-section">
+        <h3>📅 Período de Análisis</h3>
+        
+        <div class="date-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Inicio</mat-label>
+            <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" required />
+            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicio></mat-datepicker>
+            <mat-error *ngIf="formulario.get('fechaInicio')?.hasError('required')">
+              La fecha de inicio es obligatoria
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Fin</mat-label>
+            <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" required />
+            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFin></mat-datepicker>
+            <mat-error *ngIf="formulario.get('fechaFin')?.hasError('required')">
+              La fecha de fin es obligatoria
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="action-buttons">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="!getFormularioValido()"
+          class="submit-button">
+          <span *ngIf="!isLoading">
+            Generar Reporte
+          </span>
+          <span *ngIf="isLoading">Procesando...</span>
+        </button>
+
+        <button 
+          mat-stroked-button 
+          type="button" 
+          (click)="limpiarFormulario()"
+          [disabled]="isLoading"
+          class="clear-button">
+          Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Información adicional -->
+  <div class="info-section">
+    <div class="info-card">
+      <h3>Información del proceso</h3>
+      <ul>
+        <li>El sistema analizará las reuniones de todos los miembros del grupo seleccionado</li>
+        <li>Se clasificarán automáticamente las reuniones por tipo (ceremonias, rutas, etc.)</li>
+        <li>Se incluirán los beneficios de cada persona en el reporte</li>
+        <li>El archivo Excel se descargará automáticamente al completar el procesamiento</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
