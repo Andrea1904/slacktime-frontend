@@ -1,15 +1,15 @@
 {
   "version": 2,
   "framework": null,
-  "buildCommand": "npm run build",
-  "installCommand": "npm ci",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run vercel-build",
+  "installCommand": "npm install --legacy-peer-deps --force",
+  "outputDirectory": "dist/FrontSlack/browser",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist/FrontSlack/browser"
       }
     }
   ],
@@ -18,5 +18,10 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ]
+  ],
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
