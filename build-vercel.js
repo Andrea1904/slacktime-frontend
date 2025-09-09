@@ -18,14 +18,6 @@ try {
   console.log('📦 Installing dependencies...');
   execSync('npm install --legacy-peer-deps --force', { stdio: 'inherit' });
   
-  // Install Angular CLI globally to ensure it's available
-  console.log('🔧 Installing Angular CLI globally...');
-  try {
-    execSync('npm install -g @angular/cli@latest', { stdio: 'inherit' });
-  } catch (error) {
-    console.log('⚠️  Global Angular CLI install warning (continuing):', error.message);
-  }
-  
   // Ensure listr2 is properly installed
   console.log('🔧 Ensuring listr2 is properly installed...');
   try {
@@ -34,7 +26,7 @@ try {
     console.log('⚠️  listr2 install warning (continuing):', error.message);
   }
   
-  // Build Angular application using local ng
+  // Build Angular application using npx (more reliable in Vercel)
   console.log('🔨 Building Angular application...');
   execSync('./node_modules/.bin/ng build --configuration production --source-map=false', { stdio: 'inherit' });
   
