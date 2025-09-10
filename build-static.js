@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+console.log('🚀 Starting static build process...');
+
+try {
+  // Create dist/browser directory
+  const distDir = path.join(__dirname, 'dist', 'browser');
+  if (!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir, { recursive: true });
+  }
+
+  // Generate index.html
+  const indexHtml = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -149,4 +164,15 @@
     document.getElementById('fechaFin').value = today.toISOString().split('T')[0];
   </script>
 </body>
-</html>
+</html>`;
+
+  fs.writeFileSync(path.join(distDir, 'index.html'), indexHtml);
+
+  console.log('✅ Static build completed successfully!');
+  console.log('📁 Output directory:', distDir);
+  console.log('📄 Files generated:', fs.readdirSync(distDir));
+
+} catch (error) {
+  console.error('❌ Build failed:', error.message);
+  process.exit(1);
+}
